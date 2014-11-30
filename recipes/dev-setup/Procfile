@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/dev-setup.jar clojure.main -m dev-setup.server
