@@ -10,8 +10,7 @@ like to help out with maintenance, drop me a message.
 
 ## Recipes
 
--
-[dimple-bar-chart](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/dimple-bar-chart)
+1. [dimple-bar-chart](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/dimple-bar-chart)
 Simple vertical bar chart created with dimple.js
 
 ## Component ideas
