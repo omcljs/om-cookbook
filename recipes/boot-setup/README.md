@@ -44,6 +44,7 @@ boot.user=> (start-repl)
 boot.user=> (js/console.log "Hello!")
 ```
 
+[installboot]:       https://github.com/boot-clj/boot#install
 [blog-post]:         http://adzerk.com/blog/2014/11/clojurescript-builds-rebooted/
 [boot]:              https://github.com/boot-clj/boot
 [boot-cljs-example]: https://github.com/adzerk/boot-cljs-example
