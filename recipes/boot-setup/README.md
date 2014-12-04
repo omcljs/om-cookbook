@@ -4,7 +4,7 @@ You want to start a new om project with boot-cljs but don't know how.
 
 # Solution
 
-Read [introductory blog post] on boot-cljs.
+Read [introductory blog post][blog-post] on boot-cljs.
 Another example project on boot-cljs: [boot-cljs-example].
 
 ## Prepare
