@@ -19,7 +19,9 @@ like to help out with maintenance, drop me a message.
    Simple vertical bar chart created with dimple.js
 4. [views](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/views)
    Multiple views of a single data source (using multimethods).
-
+5. [Components Using Local State](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/local-state)
+   Making components with local state.
+   
 ## Component ideas
 
 TBA
