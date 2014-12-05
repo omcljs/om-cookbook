@@ -21,6 +21,7 @@ like to help out with maintenance, drop me a message.
    Multiple views of a single data source (using multimethods).
 5. [Components Using Local State](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/local-state)
    Making components with local state.
+6. [Color Coded Input Validation](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/input-validation)
    
 ## Component ideas
 
