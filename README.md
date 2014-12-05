@@ -22,7 +22,8 @@ like to help out with maintenance, drop me a message.
 5. [Components Using Local State](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/local-state)
    Making components with local state.
 6. [Color Coded Input Validation](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/input-validation)
-   
+7. [Input Auto-completion](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/auto-complete)
+
 ## Component ideas
 
 TBA
