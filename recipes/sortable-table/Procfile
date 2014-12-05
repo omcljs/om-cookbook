@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/sortable-table.jar clojure.main -m sortable-table.server
