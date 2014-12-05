@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/local-state.jar clojure.main -m local-state.server
