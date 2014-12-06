@@ -1,5 +1,8 @@
 # Om Toggle Button
 
+Preview Image:
+![alt text](preview.gif "Preview Animation Image GIF")
+
 1) Create a new Om project using Chestnut
 
 ```bash
