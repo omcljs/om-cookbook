@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/routing-with-secretary.jar clojure.main -m routing-with-secretary.server
