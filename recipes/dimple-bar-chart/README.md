@@ -42,15 +42,13 @@ this:
 
  ```JavaScript
  <div id="app">
-   <script src="/lib/d3.v3.4.8.js"></script>
-   <script src="http://dimplejs.org/dist/dimple.v2.1.0.min.js"></script>
    <script type="text/javascript">
      var data = [{ "value":240000, "timestamp":"2014-01-01"},
                  { "value":260000, "timestamp":"2014-02-01"},
                  { "value":290000, "timestamp":"2014-03-01"},
                  { "value":70000,  "timestamp":"2014-04-01"}];
 
-     var svg = dimple.newSvg("#chart", 600, 400);
+     var svg = dimple.newSvg("#app", 600, 400);
      var myChart = new dimple.chart(svg, data);
      myChart.setBounds("5%", "15%", "80%", "60%")
      var x = myChart.addCategoryAxis("x", "timestamp");
