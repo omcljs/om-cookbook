@@ -1,3 +1,7 @@
+# Color Coded Input Validation
+
+![alt text](preview.gif "Preview Image GIF")
+
 1) Create a new Om project using Chestnut
 
 ```bash
