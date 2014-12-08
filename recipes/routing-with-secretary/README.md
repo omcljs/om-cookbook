@@ -1,5 +1,7 @@
 # Single Page Routing With Secretary
 
+![alt text](preview.gif "Preview Image GIF")
+
 1) Create a new Om project using Chestnut
 
 ```bash
