@@ -26,6 +26,7 @@ like to help out with maintenance, drop me a message.
 8. [Single Attribute Sortable Table](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/sortable-table)
 9. [Secretary Routing with Om Components](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/routing-with-secretary)
 10. [Custom Toggle Buttons](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/toggle-button)
+11. [DataScript Query Browser](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/datascript-query-browser)
 
 ## Component ideas
 
