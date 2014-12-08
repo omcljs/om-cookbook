@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/scrollbar.jar clojure.main -m scrollbar.server
