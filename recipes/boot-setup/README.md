@@ -15,7 +15,7 @@ Another example project on boot-cljs: [boot-cljs-example].
 boot -u
 ```
 
-This will update boot to the latest stable release version. Since boot is
+This will update boot to the latest stable release version (tested with 2.0.0-RC1). Since boot is
 pre-alpha software at the moment, you should do this frequently.
 
 ## Use
