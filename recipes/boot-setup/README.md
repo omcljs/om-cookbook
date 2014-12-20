@@ -24,17 +24,9 @@ pre-alpha software at the moment, you should do this frequently.
 boot dev
 ```
 
-This will watch your project and build and reload your project.
+This will serve the project at http://localhost:3000, watch the sources, build and reload your project.
 
-To serve the project I just use python's simpleserver
-(boot-cljs-example uses another solution):
-
-```bash
-cd target
-python -m SimpleHTTPServer 6666
-```
-
-Now open http://localhost:6666 and try changing something core.cljs!
+Now open http://localhost:3000 and try changing something in core.cljs!
 To use cljs-repl in another terminal do:
 
 ```
@@ -42,6 +34,10 @@ boot repl --client
 boot.user=> (start-repl)
 ; Refresh the page
 boot.user=> (js/console.log "Hello!")
+boot.user=> (in-ns 'boot-setup.core)
+boot-setup.core=> (swap! app-state assoc :cong "Profit!")
+boot-setup.core=> (another-root)
+boot-setup.core=> (main)
 ```
 
 [installboot]:       https://github.com/boot-clj/boot#install
