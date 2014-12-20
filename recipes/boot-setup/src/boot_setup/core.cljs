@@ -18,4 +18,16 @@
     app-state
     {:target js/document.body}))
 
+(defn another-root
+  []
+  (om/root
+    (fn [app owner]
+      (reify
+        om/IRender
+        (render [_]
+          (dom/div nil
+            (dom/h1 nil "Hello from prototype!")))))
+    app-state
+    {:target js/document.body}))
+
 (set! (.-onload js/window) main)
