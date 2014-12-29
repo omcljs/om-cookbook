@@ -26,7 +26,7 @@
   (comp (serve :dir "target")
         (watch)
         (cljs-repl)
+        (reload :on-jsload 'boot-setup.core/main)
         (cljs :source-map true
               :optimizations :none
-              :unified-mode true)
-        (reload :on-jsload 'boot-setup.core/main)))
+              :unified-mode true)))
