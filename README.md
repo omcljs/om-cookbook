@@ -29,6 +29,7 @@ like to help out with maintenance, drop me a message.
 11. [DataScript Query Browser](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/datascript-query-browser)
 12. [Custom Scrolling Bar](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/scrollbar)
 13. [Circle Rotation Knobs](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/knob)
+14. [Canvas Animation](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/animator)
 
 
 ## Component ideas
