@@ -10,14 +10,14 @@ like to help out with maintenance, drop me a message.
 
 ## Recipes
 
-1. [dev-setup](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/dev-setup)
+1. [Dev Setup](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/dev-setup)
    Basic dev environment setup with chestnut that includes Figwheel, Weasel and
    ring server.
-2. [boot-setup](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/boot-setup)
+2. [Boot Setup](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/boot-setup)
     How to start a new Om project with boot-cljs.
-3. [dimple-bar-chart](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/dimple-bar-chart)
+3. [Dimple Bar Chart](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/dimple-bar-chart)
    Simple vertical bar chart created with dimple.js
-4. [views](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/views)
+4. [Views](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/views)
    Multiple views of a single data source (using multimethods).
 5. [Components Using Local State](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/local-state)
    Making components with local state.
@@ -30,8 +30,5 @@ like to help out with maintenance, drop me a message.
 12. [Custom Scrolling Bar](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/scrollbar)
 13. [Circle Rotation Knobs](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/knob)
 14. [Canvas Animation](https://github.com/om-cookbook/om-cookbook/tree/master/recipes/animator)
+15. [Kioo Example - Enlive/Enfocus Style Templates](https://github.com/omcljs/om-cookbook/tree/master/recipes/kioo-blog)
 
-
-## Component ideas
-
-TBA
