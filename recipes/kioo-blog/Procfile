@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/kioo-blog.jar clojure.main -m kioo-blog.server
