@@ -26,7 +26,7 @@
   (defonce ^:private server
     (do
       (if is-dev? (start-figwheel))
-      (let [port (Integer. (or port (env :port) 10555))]
+      (let [port (Integer. (or port (env :port) 10559))]
         (print "Starting web server on port" port ".\n")
         (run-server http-handler {:port port
                           :join? false}))))
