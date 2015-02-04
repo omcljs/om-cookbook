@@ -25,51 +25,42 @@ lein new chestnut sortable-table -- --om-tools --http-kit
             {:gender "N/A" :name "person7" :age 80}]}))
 ```
 
-4) Create up and down arrow event logic.
+4) Define state in your local component to store sort settings
 
 ```clojure
-(defn sort-by-*! [k]
-  (swap! app-state
-         update-in
-         [:table]
-         (fn [table]
-           (sort-by k table))))
-
-(defn sort-by-*-reverse! [k]
-  (swap! app-state
-         update-in
-         [:table]
-         (fn [table]
-           (reverse
-            (sort-by k table)))))
+(init-state [_] {:sort :nil
+                 :sort-dir nil})
 ```
-5) Create a table view header component
+
+5) Define a way to change the sort order and key
+
+``` clojure
+(defn change-sorting [owner key]
+  ;; invert direction on second click
+  (when (= (om/get-state owner :sort) key)
+    (om/set-state! owner :sort-dir (not (om/get-state owner :sort-dir))))
+  (om/set-state! owner :sort key))```
+
+6) Set up the function to sort the data
+
+``` clojure
+(defn sorted-data [key direction data]
+  (if key
+    ((if direction reverse identity)
+     (sort-by key data))
+    data))```
+
+7) Create a table view header component
 
 ```clojure
 (defcomponent table-view-header [{:keys [header]} _]
   (render [_]))
 ```
 
-6) Add TH element to parent the attribute name and sortable arrows.
+8) Add header element with a fn that changes the sort setting
 
 ```clojure
-(defcomponent table-view-header [{:keys [header]} _]
-  (render
-   [_]
-   (let [header-name (name header)]
-     (dom/th {}
-             (clojure.string/capitalize header-name)
-             ;; UTF-8 Up Arrow
-             (dom/a {} "↑")
-             ;; UTF-8 Down Arrow
-             (dom/a {} "↓")))))
-
-```
-
-7) Add table view header styles and JavaScript events.
-
-```clojure
-(defcomponent table-view-header [{:keys [header]} _]
+(defcomponent table-view-header [{:keys [header sort-fn]} _] 
   (render
    [_]
    (let [header-name (name header)
@@ -77,21 +68,14 @@ lein new chestnut sortable-table -- --om-tools --http-kit
          attr {:href "javascript:void(0);"
                :style {:margin "5px;"
                        :font-size "30px;"
-                       :text-decoration "none;"}}
-         arrow-down-event (fn [_]
-                            (sort-by-*! header-kw))
-         arrow-up-event (fn [_]
-                          (sort-by-*-reverse! header-kw))
-         arrow-up-attr (assoc attr :on-click arrow-up-event)
-         arrow-down-attr (assoc attr :on-click arrow-down-event)
+                       :text-decoration "none;"}
+               :on-click sort-fn}
          header-attr {:style {:padding-right "20px;"
                               :font-size "25px;"}}]
      (dom/th header-attr
              (clojure.string/capitalize header-name)
-             ;; UTF-8 Up Arrow
-             (dom/a arrow-up-attr "↑")
-             ;; UTF-8 Down Arrow
-             (dom/a arrow-down-attr "↓")))))
+             ;; UTF-8 Up/Down Arrow
+             (dom/a attr "⬍")))))
 ```
 
 8) Create a table row component
@@ -105,38 +89,47 @@ lein new chestnut sortable-table -- --om-tools --http-kit
       (dom/td value)))))
 ```
 
-9) Define a function to return all possible headers in the table.
+9) Define a function that gets the table headers and adds the sort key
 
 ```clojure
-(defn header-types []
-  (map #(hash-map :header %)
-       (-> @app-state
-           :table
+(defn header-types [data sort-fn]
+  (map #(hash-map :header % :sort-fn (partial sort-fn %))
+       (-> data
            first
            keys)))
-
 ```
 
 10) Create a component that builds the table's header and rows.
+This table component holds the local sort state.
+The partial is being used to draft a function that is called with the "owern" from this scope and the header key from the header-types scope
 
 ```clojure
-(defcomponent table-view [app _]
-  (render
-   [_]   
+(defcomponent table-view [data owner]
+  (init-state [_] {:sort :nil
+                   :sort-dir nil})
+  (render-state
+   [_ state]   
    (dom/table
-    (dom/tr
-     (om/build-all table-view-header
-                   (header-types)))
-    (om/build-all table-row
-                  (:table app)))))
+      (dom/tr
+       (om/build-all table-view-header (header-types data (partial change-sorting owner))))
+      (om/build-all table-row
+                    (sorted-data (:sort state)
+                                 (:sort-dir state)
+                                 data)))))
 ```
 
-11) Replace or alter your main function to display the table view.
+11) Define the view that holds the table, and hand it the app state cursor
+
+(defcomponent main-view [app-state]
+  (render [_]
+          (om/build table-view (:table app-state))))
+
+12) Display the main view
 
 ```clojure
 (defn main []
   (om/root
-   table-view
+   main-view
    app-state
    {:target (. js/document (getElementById "app"))}))
 ```
