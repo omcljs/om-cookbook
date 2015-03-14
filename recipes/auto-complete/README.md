@@ -6,20 +6,16 @@
 
 ```bash
 lein new chestnut auto-complete -- --om-tools --http-kit
-```
-2) Use your editor of choice to open the file `auto-complete/src/cljs/core.cljs`
-
-3) This namespace will need ``clojure.string`
-
-```clojure
-(ns auto-complete.core
-  (:require [om.core :as om :include-macros true]
-            [om-tools.dom :as dom :include-macros true]
-            [om-tools.core :refer-macros [defcomponent]]
-            [clojure.string :as cs]))
+cd auto-complete
 ```
 
-4) Your initial app-state should look like this.
+2) Use your editor of choice to open the file `src/cljs/auto_complete/core.cljs`
+
+
+3) For this demo keep namespace as is.
+
+
+4) Replace `app-state` with the following:
 
 ```clojure
 (defonce app-state
@@ -27,30 +23,29 @@ lein new chestnut auto-complete -- --om-tools --http-kit
          :things ["Apple"
                   "ant"
                   "bird"
-                  "CAR"
+                  "CAR, Audi"
                   "crayon"
                   "cooler"
                   "DVD"
                   "Dirt"
-                  "DOG"]}))
+                  "DOG, Beagle"]}))
 ```
 
-5) Create a function that will handle the auto-complete logic.
+
+5) Create function for handling auto-complete logic.
 
 ```clojure
-(defn partial-complete [x]
-  (if-not (empty? x)
-    (let [x (cs/lower-case x)
-          things (:things @app-state)
-          things-lower (map cs/lower-case things)
-          things-map (zipmap things things-lower)
-          pattern (re-pattern
-                   (str "^" x ".*"))
-          possible-things (filter #(re-matches pattern (val %))
-                                  things-map)]
-      (if-let [possible-things (seq possible-things)]
-        (map key possible-things)))))
+(defn partial-complete
+  "Takes a needle and looks for it in the haystack.
+Return all matches in a set or nil on empty match set.
+Empty needle causes empty match set.
+The needle will match any part of the string."
+  [needle haystack]
+  (when-not (empty? needle)
+    (let [pattern (js/RegExp. (str ".* " needle ".*|" needle ".*") "i")]
+      (not-empty (set (keep #(re-matches pattern %) haystack))))))
 ```
+
 
 6) Create a view that will display the results of the completion function.
 
@@ -59,6 +54,7 @@ lein new chestnut auto-complete -- --om-tools --http-kit
   (render [_]))
 ```
 
+
 7) Add the completion function to the view.
 
 ```clojure
@@ -66,39 +62,26 @@ lein new chestnut auto-complete -- --om-tools --http-kit
   (render
    [_]
    (dom/div
-    (if-let [completions (seq
-                          (partial-complete (:user-input app)))]
+    (if-let [completions (partial-complete (:user-input app) (:things app))]
       (for [thing completions]
         (dom/div {} thing))
       "No Completions."))))
 ```
 
-8) Create a user input view.
+
+8) Add user input field and apply onChange JavaScript event.
+   This event should update the application state with `om/update!`.
 
 ```clojure
-(defcomponent user-input [app owner]
+(defcomponent user-input [app _]
   (render
    [_]
-   (let [ref "user-input"
-         k :user-input]
-     (dom/input {:ref ref}))))
+   (dom/input {:value (:user-input app)
+               :on-change #(om/update! app :user-input (.. % -target -value))})))
 ```
 
-9) Add an onChange JavaScript event. This event should update the application state with `om/update!`.
 
-```clojure
-(defcomponent user-input [app owner]
-  (render
-   [_]
-   (let [ref "user-input"
-         k :user-input]
-     (dom/input {:ref ref
-                 :on-change (fn [_]
-                              (let [this (om/get-node owner ref)
-                                    v (.-value this)]
-                                (om/update! app k v)))}))))
-```
-10) Make a component view that places the user input view above the partial completion view. 
+9) Make a component view that places the user input view above the partial completion view. 
 
 ```clojure
 (defcomponent auto-complete-view [app _]
@@ -110,7 +93,8 @@ lein new chestnut auto-complete -- --om-tools --http-kit
     (om/build partial-complete-view app))))
 ```
 
-11) Replace or alter your main function to display the validation box view.
+
+10) Replace or alter your main function to display the validation box view.
 
 ```clojure
 (defn main []
@@ -119,34 +103,38 @@ lein new chestnut auto-complete -- --om-tools --http-kit
    app-state
    {:target (. js/document (getElementById "app"))}))
 ```
-12) Start a REPL with `lein repl`
+
+
+11) Start a REPL with `lein repl`
 
 ```
-nREPL server started on port 54879 on host 127.0.0.1 - nrepl://127.0.0.1:54879
+nREPL server started on port 52193 on host 127.0.0.1 - nrepl://127.0.0.1:52193
 REPL-y 0.3.5, nREPL 0.2.6
 Clojure 1.6.0
-Java HotSpot(TM) 64-Bit Server VM 1.8.0_05-b13
-Docs: (doc function-name-here)
-(find-doc "part-of-name-here")
-Source: (source function-name-here)
-Javadoc: (javadoc java-object-or-class-here)
-Exit: Control+D or (exit) or (quit)
-Results: Stored in vars *1, *2, *3, an exception in *e
+OpenJDK 64-Bit Server VM 1.8.0_31-b13
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+    Exit: Control+D or (exit) or (quit)
+ Results: Stored in vars *1, *2, *3, an exception in *e
 ```
 
-13) Call `run` to start the back end and compile your ClojureScript.
+12) Call `run` to start the back end and compile your ClojureScript.
 
 ```
 auto-complete.server=> (run)
-Starting figwheel.
-Starting web server on port 10555 .
-#<clojure.lang.AFunction$1@336fc74>
-auto-complete.server=> Compiling ClojureScript.
 Figwheel: Starting server at http://localhost:3449
-Figwheel: Serving files from '(dev-resources|resources)/public'
-Compiling "resources/public/js/app.js" from ("src/cljs" "env/dev/cljs")...
-Successfully compiled "resources/public/js/app.js" in 18.01 seconds.
-notifying browser that file changed:  /js/out/local_state/core.js
+Figwheel: Serving files from '(resources)/public'
+Starting web server on port 10555 .
+#<clojure.lang.AFunction$1@a95717>
+auto-complete.server=> Compiling "resources/public/js/app.js" from ["env/dev/cljs" "src/cljs"]...
+WARNING: No such namespace: auto-complete.core at line 1 env/dev/cljs/auto_complete/main.cljs
+Successfully compiled "resources/public/js/app.js" in 20.965 seconds.
+notifying browser that file changed:  /js/app.js
+notifying browser that file changed:  /js/out/goog/deps.js
+notifying browser that file changed:  /js/out/auto_complete/core.js
+notifying browser that file changed:  /js/out/auto_complete/main.js
 ```
 
-14) Point your browser to http://localhost:port. You can find the port in the REPL message output =>  `Starting web server on port ...`
+13) Point your browser to http://localhost:port. You can find the port in the REPL message output =>  `Starting web server on port ...`
