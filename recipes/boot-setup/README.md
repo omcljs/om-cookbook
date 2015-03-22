@@ -18,6 +18,13 @@ boot -u
 This will update boot to the latest stable release version (tested with 2.0.0-RC1). Since boot is
 pre-alpha software at the moment, you should do this frequently.
 
+```bash
+boot cljs
+```
+
+This ensures that the target directory `target/` directory (from which the
+project is served) exists.
+
 ## Use
 
 ```bash
