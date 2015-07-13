@@ -1,0 +1,2 @@
+{:require [boot-setup.core]
+ :init-fns [boot-setup.core/main]}
