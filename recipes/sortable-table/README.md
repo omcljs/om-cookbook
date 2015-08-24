@@ -39,7 +39,8 @@ lein new chestnut sortable-table -- --om-tools --http-kit
   ;; invert direction on second click
   (when (= (om/get-state owner :sort) key)
     (om/set-state! owner :sort-dir (not (om/get-state owner :sort-dir))))
-  (om/set-state! owner :sort key))```
+  (om/set-state! owner :sort key))
+```
 
 6) Set up the function to sort the data
 
@@ -48,7 +49,8 @@ lein new chestnut sortable-table -- --om-tools --http-kit
   (if key
     ((if direction reverse identity)
      (sort-by key data))
-    data))```
+    data))
+```
 
 7) Create a table view header component
 
@@ -133,7 +135,8 @@ The partial is being used to draft a function that is called with the "owern" fr
    app-state
    {:target (. js/document (getElementById "app"))}))
 ```
-12) Start a REPL with `lein repl`
+
+13) Start a REPL with `lein repl`
 
 ```
 nREPL server started on port 54879 on host 127.0.0.1 - nrepl://127.0.0.1:54879
@@ -148,7 +151,7 @@ Exit: Control+D or (exit) or (quit)
 Results: Stored in vars *1, *2, *3, an exception in *e
 ```
 
-13) Call `run` to start the back end and compile your ClojureScript.
+14) Call `run` to start the back end and compile your ClojureScript.
 
 ```
 sortable-table.server=> (run)
@@ -163,5 +166,5 @@ Successfully compiled "resources/public/js/app.js" in 18.01 seconds.
 notifying browser that file changed:  /js/out/local_state/core.js
 ```
 
-14) Point your browser to http://localhost:port. You can find the port in the REPL message output =>  `Starting web server on port ...`
+15) Point your browser to http://localhost:port. You can find the port in the REPL message output =>  `Starting web server on port ...`
 
