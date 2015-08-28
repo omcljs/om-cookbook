@@ -16,7 +16,7 @@
        :version "0.1.0-SNAPSHOT"})
 
 (require '[adzerk.boot-cljs :refer [cljs]]
-         '[adzerk.boot-cljs-repl :refer [cljs-repl]]
+         '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
          '[adzerk.boot-reload :refer [reload]]
          '[pandeiro.boot-http :refer [serve]])
 
